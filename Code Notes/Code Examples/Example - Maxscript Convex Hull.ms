@@ -1,3 +1,5 @@
+-- 2014.5.20 added Convert To Poly button.
+
 -------------------------------------------------------------------------------------------
 -- STRUCTS
 -------------------------------------------------------------------------------------------
@@ -31,6 +33,7 @@ rollout hulldialog "Convex Hull Generator"
     label space ""
     pickbutton hullpick "Pick Mesh" autoDisplay:true
     button hullbutton "Generate Hull"
+    button convertpoly "Convert To Poly"
     progressBar hullprogress value:0
     
     --DIALOG LOCAL VARS
@@ -154,6 +157,18 @@ rollout hulldialog "Convex Hull Generator"
         if numberfound == 2 then ( isSharingVerts = true    )
         return isSharingVerts
     )
+    
+    -------------------------------------------------------------------------------------
+    --CONVERT GENERATED MESH TO POLY
+    -------------------------------------------------------------------------------------
+    on convertpoly pressed do
+    (
+        if (selection.count == 0) then 
+            messagebox "Please select the generated hull(s)"
+        else
+            macros.run "Modifier Stack" "Convert_to_Poly"
+    )
+
     -------------------------------------------------------------------------------------
     --PICK OBJECT
     -------------------------------------------------------------------------------------
